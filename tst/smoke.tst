@@ -57,7 +57,7 @@ true
 gap> SpaceGroupCohomologyRingGapInterface(108);
 ===========================================
 Mod-2 Cohomology Ring of Group No. 108:
-Z2[Amp,Am,Axyz,Ba,Bzxy,Dd]/<R2,R3,R4,R5,R6>
+Z2[Amp,Am,Axyz,Ba,Bzxy,Dd]/<R2,R3,R4,R5,R6,R8>
 R2:  Amp.Am  Amp.Axyz  Axyz^2+Amp^2+Am^2
 R3:  Am.Bzxy+Am^2.Axyz+Am.Axyz^2+Axyz.Ba  Axyz.Bzxy+Am^2.Axyz+Am.Axyz^2+Axyz.B\
 a
@@ -75,7 +75,7 @@ true
 gap> SpaceGroupCohomologyRingGapInterface(219);
 ===========================================
 Mod-2 Cohomology Ring of Group No. 219:
-Z2[Am,Ba,Bxyxzyz,Ca,Cb,Fd1,Fd2]/<R3,R4,R5,R6>
+Z2[Am,Ba,Bxyxzyz,Ca,Cb,Fd1,Fd2]/<R3,R4,R5,R6,R7,R8,R9,R12>
 R3:  Am^3
 R4:  Am^2.Ba  Am^2.Bxyxzyz  Am.Ca  Am.Cb  Bxyxzyz^2+Ba.Bxyxzyz
 R5:  Ba.Cb+Bxyxzyz.Ca  Bxyxzyz.Cb+Bxyxzyz.Ca

@@ -800,19 +800,13 @@ RelReduceMat  := [];
 
 #### Begin preparation for relation reduction
 ####
-iu := 1;
-for p in allGens do
-    for q in allGens do
-        for r in allGens do
-            if (p+q+r)*GenDegAll = 3 then
-                Append(RelReduceLett,[p+q+r]);
-                iu := iu+1;
-            fi;
-        od;
-    od;
-od;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 3);
 
-RelRedLen := iu;
+#+1: keep one trailing always-zero column so RelReduceMat and the reduction
+#vectors are never zero-width, even when no monomial of this degree exists
+#(e.g. IT=198, whose only generator has degree 3). Same convention below and
+#in PrepRelReduce.
+RelRedLen := Length(RelReduceLett) + 1;
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -940,21 +934,8 @@ RelReduceMat  := [];
 
 #### Begin preparation for relation reduction
 ####
-iu := 1;
-for p in allGens do
-    for q in allGens do
-        for r in allGens do
-            for s in allGens do
-                if (p+q+r+s)*GenDegAll = 4 then
-                    Append(RelReduceLett,[p+q+r+s]);
-                    iu := iu+1;
-                fi;
-            od;
-        od;
-    od;
-od;
-
-RelRedLen := iu;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 4);
+RelRedLen := Length(RelReduceLett) + 1;   #+1: trailing zero column, see r=3
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -1133,29 +1114,8 @@ RelReduceMat  := [];
 
 #### Begin preparation for relation reduction
 ####
-iu := 1;
-
-for ip in [1..(Sum(GenDimAll)+1)] do
-    p := allGens[ip];
-    for iq in [ip..(Sum(GenDimAll)+1)] do
-        q := allGens[iq];
-        for ir in [iq..(Sum(GenDimAll)+1)] do
-            r := allGens[ir];
-            for is in [ir..(Sum(GenDimAll)+1)] do
-                s := allGens[is];
-                for it in [is..(Sum(GenDimAll)+1)] do
-                    t := allGens[it];
-                    if (p+q+r+s+t)*GenDegAll = 5 then
-                        Append(RelReduceLett,[p+q+r+s+t]);
-                        iu := iu+1;
-                    fi;
-                od;
-            od;
-        od;
-    od;
-od;
-
-RelRedLen := iu;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 5);
+RelRedLen := Length(RelReduceLett) + 1;   #+1: trailing zero column, see r=3
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -1487,31 +1447,8 @@ fi;
 
 #### Begin preparation for relation reduction
 ####
-iv := 1;
-for ip in [1..(Sum(GenDimAll)+1)] do
-    p := allGens[ip];
-    for iq in [ip..(Sum(GenDimAll)+1)] do
-        q := allGens[iq];
-        for ir in [iq..(Sum(GenDimAll)+1)] do
-            r := allGens[ir];
-            for is in [ir..(Sum(GenDimAll)+1)] do
-                s := allGens[is];
-                for it in [is..(Sum(GenDimAll)+1)] do
-                    t := allGens[it];
-                    for iu in [it..(Sum(GenDimAll)+1)]  do
-                        u := allGens[iu];
-                        if (p+q+r+s+t+u)*GenDegAll = 6 then
-                            Append(RelReduceLett,[p+q+r+s+t+u]);
-                            iv := iv+1;
-                        fi;
-                    od;
-                od;
-            od;
-        od;
-    od;
-od;
-
-RelRedLen := iv;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 6);
+RelRedLen := Length(RelReduceLett) + 1;   #+1: trailing zero column, see r=3
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -2230,34 +2167,8 @@ RelReduceMat  := [];
 
 #### Begin preparation for relation reduction
 ####
-iw := 1;
-for ip in [1..(Sum(GenDimAll)+1)] do
-    p := allGens[ip];
-    for iq in [ip..(Sum(GenDimAll)+1)] do
-        q := allGens[iq];
-        for ir in [iq..(Sum(GenDimAll)+1)] do
-            r := allGens[ir];
-            for is in [ir..(Sum(GenDimAll)+1)] do
-                s := allGens[is];
-                for it in [is..(Sum(GenDimAll)+1)] do
-                    t := allGens[it];
-                    for iu in [it..(Sum(GenDimAll)+1)]  do
-                        u := allGens[iu];
-                        for iv in [iu..(Sum(GenDimAll)+1)]  do
-                            v := allGens[iv];
-                            if (p+q+r+s+t+u+v)*GenDegAll = 7 then
-                                Append(RelReduceLett,[p+q+r+s+t+u+v]);
-                                iw := iw+1;
-                            fi;
-                        od;
-                    od;
-                od;
-            od;
-        od;
-    od;
-od;
-
-RelRedLen := iw;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 7);
+RelRedLen := Length(RelReduceLett) + 1;   #+1: trailing zero column, see r=3
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -2655,37 +2566,8 @@ RelReduceMat  := [];
 
 #### Begin preparation for relation reduction
 ####
-ix := 1;
-for ip in [1..(Sum(GenDimAll)+1)] do
-    p := allGens[ip];
-    for iq in [ip..(Sum(GenDimAll)+1)] do
-        q := allGens[iq];
-        for ir in [iq..(Sum(GenDimAll)+1)] do
-            r := allGens[ir];
-            for is in [ir..(Sum(GenDimAll)+1)] do
-                s := allGens[is];
-                for it in [is..(Sum(GenDimAll)+1)] do
-                    t := allGens[it];
-                    for iu in [it..(Sum(GenDimAll)+1)]  do
-                        u := allGens[iu];
-                        for iv in [iu..(Sum(GenDimAll)+1)]  do
-                            v := allGens[iv];
-                            for iw in [iv..(Sum(GenDimAll)+1)]  do
-                                w := allGens[iw];
-                                if (p+q+r+s+t+u+v+w)*GenDegAll = 8 then
-                                    Append(RelReduceLett,[p+q+r+s+t+u+v+w]);
-                                    ix := ix+1;
-                                fi;
-                            od;
-                        od;
-                    od;
-                od;
-            od;
-        od;
-    od;
-od;
-
-RelRedLen := ix;
+RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, 8);
+RelRedLen := Length(RelReduceLett) + 1;   #+1: trailing zero column, see r=3
 
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 
@@ -3133,7 +3015,7 @@ CupRelByDeg[8] := CupRel8Lett;
 PrepRelReduce := function(degr)
 local k, m, v, w, vec;
 RelReduceLett := SGC_MonomialsOfDegree(GensLett, GenDegAll, degr);
-RelRedLen := Length(RelReduceLett)+1;
+RelRedLen := Length(RelReduceLett)+1;   #+1: trailing zero column, see r=3
 RelReduceMat := [List([1..RelRedLen],x->0)];         #This makes sure that RelReduceMat is not an empty matrix
 for k in [1..degr-2] do
     for m in SGC_MonomialsOfDegree(GensLett, GenDegAll, k) do
@@ -3411,94 +3293,50 @@ Print("Mod-2 Cohomology Ring of Group No. ", IT, ":\n");
 Print("Z2[", JoinStringsWithSeparator(mono,","), "]");
 
 
-mono := 0;
-if Length(CupRel2Lett)+Length(CupRel3Lett)+Length(CupRel4Lett)+Length(CupRel5Lett)+Length(CupRel6Lett)> 0 then
-    Print("/<");
-    if Length(CupRel2Lett)>0 then
-        Print("R2");
-        mono := 1;
-    fi;
-    if Length(CupRel3Lett)>0 then
-        if mono = 1 then           #mono = 1 means at least one relation already printed
-            Print(",R3");
-        else
-            Print("R3");
-        fi;
-        mono := 1;
-    fi;
-    if Length(CupRel4Lett)>0 then
-        if mono = 1 then           #mono = 1 means at least one relation already printed
-            Print(",R4");
-        else
-            Print("R4");
-        fi;
-        mono := 1;
-    fi;
-    if Length(CupRel5Lett)>0 then
-        if mono = 1 then           #mono = 1 means at least one relation already printed
-            Print(",R5");
-        else
-            Print("R5");
-        fi;
-        mono := 1;
-    fi;
-    if Length(CupRel6Lett)>0 then
-        if mono = 1 then           #mono = 1 means at least one relation already printed
-            Print(",R6");
-        else
-            Print("R6");
-        fi;
-    fi;
-        Print(">\n");
-fi;
-
-
-if Length(CupRel2Lett) > 0 then
-    Print("R2:  ");List(CupRel2Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-fi;
-if Length(CupRel3Lett) > 0 then
-    Print("R3:  ");List(CupRel3Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-fi;
-if Length(CupRel4Lett) > 0 then
-    Print("R4:  ");List(CupRel4Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-fi;
-if Length(CupRel5Lett) >0 then
-    Print("R5:  ");List(CupRel5Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-fi;
-if Length(CupRel6Lett) >0 then
-    Print("R6:  ");List(CupRel6Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-fi;
-
-#Begin printing Degree 7 and 8 relations:
-#
-#CupRel7Lett/CupRel8Lett are locals that stay unassigned unless the r=7/r=8 block
-#ran, so the gate must match that block's resolution-length condition exactly.
+#Collect the relation lists that exist on this run: degrees 2..6 always,
+#7..8 only when the r=7/r=8 block ran, 9..12 only for the degree-6 generator
+#groups (resolution length 13). CupRel7Lett etc. are locals that stay
+#unassigned otherwise, so the gates must match those blocks' resolution-length
+#conditions exactly.
+CupRelByDeg := [];
+CupRelByDeg[2] := CupRel2Lett;
+CupRelByDeg[3] := CupRel3Lett;
+CupRelByDeg[4] := CupRel4Lett;
+CupRelByDeg[5] := CupRel5Lett;
+CupRelByDeg[6] := CupRel6Lett;
 if Length(Size(R)) >= 9 then
-    if Length(CupRel7Lett) >0 then
-        Print("R7:  ");List(CupRel7Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
-    if Length(CupRel8Lett) >0 then
-        Print("R8:  ");List(CupRel8Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
+    CupRelByDeg[7] := CupRel7Lett;
+    CupRelByDeg[8] := CupRel8Lett;
 fi;
-#
-#Degree 9..12 relations exist only for the degree-6 generator groups (resolution length 13).
 if Length(Size(R)) >= 13 then
-    if Length(CupRel9Lett) >0 then
-        Print("R9:  ");List(CupRel9Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
-    if Length(CupRel10Lett) >0 then
-        Print("R10:  ");List(CupRel10Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
-    if Length(CupRel11Lett) >0 then
-        Print("R11:  ");List(CupRel11Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
-    if Length(CupRel12Lett) >0 then
-        Print("R12:  ");List(CupRel12Lett,x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));Print("\n");
-    fi;
+    CupRelByDeg[9]  := CupRel9Lett;
+    CupRelByDeg[10] := CupRel10Lett;
+    CupRelByDeg[11] := CupRel11Lett;
+    CupRelByDeg[12] := CupRel12Lett;
 fi;
-#
-#End printing Degree 7..12 relations:
+
+mono := 0;
+for r in [2..12] do
+    if IsBound(CupRelByDeg[r]) and Length(CupRelByDeg[r]) > 0 then
+        if mono = 0 then           #mono = 1 means at least one relation already printed
+            Print("/<R", r);
+        else
+            Print(",R", r);
+        fi;
+        mono := 1;
+    fi;
+od;
+if mono = 1 then
+    Print(">\n");
+fi;
+
+for r in [2..12] do
+    if IsBound(CupRelByDeg[r]) and Length(CupRelByDeg[r]) > 0 then
+        Print("R", r, ":  ");
+        List(CupRelByDeg[r],x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));
+        Print("\n");
+    fi;
+od;
 
 ####   End printing cohomology ring   ####
 #
@@ -3702,7 +3540,7 @@ SpaceGroupCohomologyRingGapInterface:=function(arg)
 local
     IT,
     T1, T2, T3, C2, C2p, M, P, C3,
-    PGGen, PGGen33, PGMat33, PGMatinv, PGind,
+    PGGen, PGGen33, PGMat33, PGMat, PGMatinv, PGind,
     o0,o1,o2,o3,o4,o5,
     G,Gp,R,CB,
     GenName_standard, Rdim,lst1,lst2,lst3,lst4,lst5,lst6,lst1to4,
@@ -3721,16 +3559,16 @@ IndToElem:=function(lst,Lst)         #given lst of 0&1's, extract the elements i
 local i,l,out;
 
 if (Length(lst) = Length(Lst)) = false then
-    Print("IndToElem:  Input is wrong!!\n");
-else
-    l:=Length(lst);
-    out := [];
-    for i in [1..l] do
-        if lst[i] = 1 then
-            Append(out,[Lst[i]]);
-        fi;
-    od;
+    Error("IndToElem: index vector and list have different lengths (",
+          Length(lst), " vs ", Length(Lst), ")\n");
 fi;
+l:=Length(lst);
+out := [];
+for i in [1..l] do
+    if lst[i] = 1 then
+        Append(out,[Lst[i]]);
+    fi;
+od;
 return out;
 end;
 #####################################################################
@@ -3764,7 +3602,7 @@ if p = fail then
     Error("Invofg: point-group part ", vpg, " not found in PGind.\n");
 fi;
 
-return MatToPow((transmat * PGMatinv[p]^(-1))^(-1));
+return MatToPow((transmat * PGMat[p])^(-1));
 end;
 #####################################################################
 Prodg1g2Pow:=function(v1,v2)
@@ -3780,7 +3618,7 @@ if p1 = fail or p2 = fail then
     Error("Prodg1g2Pow: point-group part not found in PGind (", vpg1, " or ", vpg2, ").\n");
 fi;
 
-prod := transmat1 * PGMatinv[p1]^(-1) * transmat2 * PGMatinv[p2]^(-1);
+prod := transmat1 * PGMat[p1] * transmat2 * PGMat[p2];
 
 return MatToPow(prod);
 end;
@@ -3793,55 +3631,43 @@ Fbarhomotopyindinv:=function(i,lst)            #This is the function Fbarhomotop
 return List(lst,x->Concatenation([i],x));
 end;
 #####################################################################
-FuncVal:=function(lett,v)                #Given a monomial of degree 1, 2, or 3, and argument (for the degree 3 monomial, the argument is either g1,g1,g1 or g1,g2,g2 or g1,g2,g3), evaluate the cocycle.
-local ct,deg,i,ival,j,jval,k,val,lett1;
+FuncVal:=function(lett,v)                #Given a degree-3 monomial and argument (either g1,g1,g1 or g1,g2,g2 or g1,g2,g3), evaluate the cocycle.
+local deg,i,j,jval,k,val,lett1;
 deg := GensDeg1to4*lett;
 
-if deg = 0 then
-    Print("Degree of gen is wrong!!\n");
+#Only degree-3 monomials reach this function (TopoInvdeg3 always passes
+#Base3Lett letters). The old degree-1/2 branches were dead and the degree-2
+#one was wrong (it indexed funcs[2] with a degree-1 position); anyone wiring
+#up lower-degree invariant evaluation later should get a clear error here.
+if deg <> 3 then
+    Error("FuncVal: only degree-3 monomials are supported, got degree ", deg, "\n");
 fi;
-
 
 lett1 := ShallowCopy(lett);
 
 for i in [1..Length(lett)] do            #finding the first generator that exists in lett
     if lett1[i] > 0 then
-        ival := lett1[i];                #label of generator stored in i; power of this generator stored in ival
         break;
     fi;
 od;
 
-if deg = 1 then                          #if evaluating a 1-cocycle
-    val := funcs[1][i](v[1]);
-elif deg = 2 then                        #if evaluating a 2-cocycle
-    if i > GensDim1to4[1] then
-    val := funcs[2][i-GensDim1to4[1]](v[1],v[2]);
-    else
-        lett1[i] := lett1[i] - 1;
-        j := Position(lett1,1);
-        val := funcs[1][i](v[1]) * funcs[2][j](v[2]);
-    fi;
-elif deg = 3 then                        #if evaluating a 3-cocycle
-    if i > GensDim1to4[1]+GensDim1to4[2] then                              #if a degree-3 generator
-        val := funcs[3][i-GensDim1to4[1]-GensDim1to4[2]](v[1],v[2],v[3]);
-    else                                                                   #if not a degree-3 gen., then must be a cup prod.
-        lett1[i] := lett1[i] - 1;
-        for j in [1..Length(lett)] do
-            if lett1[j] > 0 then
-                jval := lett1[j];        #label of generator stored in j; power of this generator stored in jval
-                break;
-            fi;
-        od;
-        if j > GensDim1to4[1] then                                         #if a degree-1 gen. cup a degree-2 gen.
-            val := funcs[1][i](v[1]) * funcs[2][j-GensDim1to4[1]](v[2],v[3]);
-        else                                                               #if not, then must be cup of three degree-1 gens.
-            lett1[j] := lett1[j] - 1;
-            k := Position(lett1,1);
-            val := funcs[1][i](v[1]) * funcs[1][j](v[2]) * funcs[1][k](v[3]);
+if i > GensDim1to4[1]+GensDim1to4[2] then                              #if a degree-3 generator
+    val := funcs[3][i-GensDim1to4[1]-GensDim1to4[2]](v[1],v[2],v[3]);
+else                                                                   #if not a degree-3 gen., then must be a cup prod.
+    lett1[i] := lett1[i] - 1;
+    for j in [1..Length(lett)] do
+        if lett1[j] > 0 then
+            jval := lett1[j];        #label of generator stored in j; power of this generator stored in jval
+            break;
         fi;
+    od;
+    if j > GensDim1to4[1] then                                         #if a degree-1 gen. cup a degree-2 gen.
+        val := funcs[1][i](v[1]) * funcs[2][j-GensDim1to4[1]](v[2],v[3]);
+    else                                                               #if not, then must be cup of three degree-1 gens.
+        lett1[j] := lett1[j] - 1;
+        k := Position(lett1,1);
+        val := funcs[1][i](v[1]) * funcs[1][j](v[2]) * funcs[1][k](v[3]);
     fi;
-else
-    Print("Error: Evaluating 4- or higher cocycles not implemented yet!! \n");
 fi;
 return val;
 end;
@@ -3947,6 +3773,8 @@ T3:=[[1,0,0,0],[0,1,0,0],[0,0,1,1],[0,0,0,1]]; #standard translation T3
 
 
 PGMat33 := [];
+PGMat := [];     #forward 4x4 point-group representatives; PGMat[i] = PGMatinv[i]^(-1),
+                 #precomputed so the hot paths (Invofg, Prodg1g2Pow, LSM scan) never invert
 PGMatinv := [];
 PGind := [];
 
@@ -3958,19 +3786,22 @@ PGGen33 := List([1..Length(PGGen)],k->List([1..3],i->List([1..3],j->PGGen[k][i,j
 if Length(PGGen) = 0 then
     Append(PGind,[[]]);
     PGMat33:=[[[1,0,0],[0,1,0],[0,0,1]]];
+    PGMat:=[[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]];
     PGMatinv:=[[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]];
 elif Length(PGGen) = 1 then
     for o1 in [0..(Order(PGGen33[1])-1)] do
         Append(PGind,[[o1]]);
         Append(PGMat33,[PGGen33[1]^o1]);
-        Append(PGMatinv,[(PGGen[1]^o1)^(-1)]);
+        Append(PGMat,[PGGen[1]^o1]);
+        Append(PGMatinv,[PGMat[Length(PGMat)]^(-1)]);
     od;
 elif Length(PGGen) = 2 then
     for o1 in [0..(Order(PGGen33[1])-1)] do
         for o2 in [0..1] do  #normal form: IT 75-88 have Order(PGGen[2])=4 but PGGen[2]^2=PGGen[1]
             Append(PGind,[[o1,o2]]);
             Append(PGMat33,[PGGen33[1]^o1*PGGen33[2]^o2]);
-            Append(PGMatinv,[(PGGen[1]^o1*PGGen[2]^o2)^(-1)]);
+            Append(PGMat,[PGGen[1]^o1*PGGen[2]^o2]);
+            Append(PGMatinv,[PGMat[Length(PGMat)]^(-1)]);
         od;
     od;
 elif Length(PGGen) = 3 then
@@ -3979,7 +3810,8 @@ elif Length(PGGen) = 3 then
             for o3 in [0..(Order(PGGen33[3])-1)] do
                 Append(PGind,[[o1,o2,o3]]);
                 Append(PGMat33,[PGGen33[1]^o1*PGGen33[2]^o2*PGGen33[3]^o3]);
-                Append(PGMatinv,[(PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3)^(-1)]);
+                Append(PGMat,[PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3]);
+                Append(PGMatinv,[PGMat[Length(PGMat)]^(-1)]);
             od;
         od;
     od;
@@ -3990,7 +3822,8 @@ elif Length(PGGen) = 4 then
                 for o4 in [0..(Order(PGGen33[4])-1)] do
                     Append(PGind,[[o1,o2,o3,o4]]);
                     Append(PGMat33,[PGGen33[1]^o1*PGGen33[2]^o2*PGGen33[3]^o3*PGGen33[4]^o4]);
-                    Append(PGMatinv,[(PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3*PGGen[4]^o4)^(-1)]);
+                    Append(PGMat,[PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3*PGGen[4]^o4]);
+                    Append(PGMatinv,[PGMat[Length(PGMat)]^(-1)]);
                 od;
             od;
         od;
@@ -4003,7 +3836,8 @@ elif Length(PGGen) = 5 then
                     for o5 in [0..(Order(PGGen33[5])-1)] do
                         Append(PGind,[[o1,o2,o3,o4,o5]]);
                         Append(PGMat33,[PGGen33[1]^o1*PGGen33[2]^o2*PGGen33[3]^o3*PGGen33[4]^o4*PGGen33[5]^o5]);
-                        Append(PGMatinv,[(PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3*PGGen[4]^o4*PGGen[5]^o5)^(-1)]);
+                        Append(PGMat,[PGGen[1]^o1*PGGen[2]^o2*PGGen[3]^o3*PGGen[4]^o4*PGGen[5]^o5]);
+                        Append(PGMatinv,[PGMat[Length(PGMat)]^(-1)]);
                     od;
                 od;
             od;
@@ -4186,7 +4020,7 @@ for v2 in PGind do
             for y2 in [-2..2] do
                 for z2 in [-2..2] do
                     g2 := Concatenation([x2,y2,z2],v2);
-                    mat2 := [[1,0,0,x2],[0,1,0,y2],[0,0,1,z2],[0,0,0,1]] * PGMatinv[Position(PGind,v2)]^(-1);
+                    mat2 := [[1,0,0,x2],[0,1,0,y2],[0,0,1,z2],[0,0,0,1]] * PGMat[Position(PGind,v2)];
                     if (mat2^2 = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]) then
                         if Trace(mat2)=0 then                    #C2 rotation
                             vec := TopoInvdeg3([g2],Base3Lett);

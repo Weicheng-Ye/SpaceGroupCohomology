@@ -831,7 +831,7 @@ local
         ResolutionFG,
 	Action,
         AlgRed,
-	EltsG, G, Mult, MultRecord,
+	EltsG, EltsGDict, EltsGSynced, G, Mult, MultRecord,
 	DelGen, DelWord, DelGenRec,
 	PseudoBoundary,FinalBoundary,
         FilteredLength, FilteredDimension, FilteredDimensionRecord,
@@ -852,7 +852,6 @@ fi;
 
 N:=Minimum(EvaluateProperty(P,"length"),N);
 G:=P!.group;
-bool:=not IsComponentObjectRep(One(G));
 bool:=IsHapSL2Subgroup(G) or IsHapSL2OSubgroup(G) or IsBound(G!.bianchiInteger);
 EltsG:=P!.elts;
 BoundaryP:=P!.boundary;
@@ -969,16 +968,35 @@ fi;
 ##############################################
 
 MultRecord:=[];
+#Dictionary mirror of EltsG for Mult's product lookups (previously a linear
+#Position scan over the growing element list -- the hot spot on large groups).
+#Other code (the cellular contraction's EnsureElt, HAP internals) appends to
+#EltsG directly, so each lookup first catches up on the delta; first-occurrence
+#indices are kept, so the returned positions are identical to Position's.
+EltsGDict := NewDictionary(EltsG[1], true);
+EltsGSynced := 0;
 ################################################################
 Mult:=function(g,h)
-local pos;
+local pos, prod, i;
 if not IsBound(MultRecord[g]) then MultRecord[g]:=[]; fi;
 if not IsBound(MultRecord[g][h]) then
-    pos:= Position(EltsG,EltsG[g]*EltsG[h]);
-    if pos=fail then Add(EltsG,EltsG[g]*EltsG[h]);
-    MultRecord[g][h]:= Length(EltsG);
-    else MultRecord[g][h]:= pos;
+    prod := EltsG[g]*EltsG[h];
+    if Length(EltsG) > EltsGSynced then
+        for i in [EltsGSynced+1..Length(EltsG)] do
+            if LookupDictionary(EltsGDict, EltsG[i]) = fail then
+                AddDictionary(EltsGDict, EltsG[i], i);
+            fi;
+        od;
+        EltsGSynced := Length(EltsG);
     fi;
+    pos := LookupDictionary(EltsGDict, prod);
+    if pos = fail then
+        Add(EltsG, prod);
+        pos := Length(EltsG);
+        AddDictionary(EltsGDict, prod, pos);
+        EltsGSynced := Length(EltsG);
+    fi;
+    MultRecord[g][h] := pos;
 fi;
 return MultRecord[g][h];
 end;
