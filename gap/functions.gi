@@ -3332,7 +3332,7 @@ fi;
 
 for r in [2..12] do
     if IsBound(CupRelByDeg[r]) and Length(CupRelByDeg[r]) > 0 then
-        Print("R", r, ":  ");
+        Print(Concatenation("R", String(r), ":  "));
         List(CupRelByDeg[r],x->PrintMonomialString(x,GenDimAll,"+",GENNAMES[IT]));
         Print("\n");
     fi;
