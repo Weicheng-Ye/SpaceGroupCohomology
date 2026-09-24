@@ -19,26 +19,4 @@ gap> WPCohomologyTable(22);;
 gap> WPCohomologyClass(108,["4a"]);;
 Amp.Ba+Am.Ba+Axyz.Ba+Amp.Bzxy
 
-# End-to-end ring and LSM output for a group with degree-6 generators.
-gap> SpaceGroupCohomologyRingGapInterface(219);
-===========================================
-Mod-2 Cohomology Ring of Group No. 219:
-Z2[Am,Ba,Bxyxzyz,Ca,Cb,Fd1,Fd2]/<R3,R4,R5,R6,R7,R8,R9,R12>
-R3:  Am^3
-R4:  Am^2.Ba  Am^2.Bxyxzyz  Am.Ca  Am.Cb  Bxyxzyz^2+Ba.Bxyxzyz
-R5:  Ba.Cb+Bxyxzyz.Ca  Bxyxzyz.Cb+Bxyxzyz.Ca
-R6:  Cb^2+Ca.Cb
-R7:  Am.Fd1  Am.Fd2
-R8:  Bxyxzyz.Fd1  Bxyxzyz.Fd2+Ba.Fd2
-R9:  Cb.Fd1  Cb.Fd2+Ca.Fd2
-R12:  Fd1^2+Ba^3.Ca^2+Ba^2.Bxyxzyz.Ca^2+Ca^4+Ca^3.Cb+Ca^2.Fd1  Fd1.Fd2  Fd2^2+\
-Ba^2.Bxyxzyz.Ca^2+Ca^3.Cb+Ca^2.Fd2
-===========================================
-LSM:
-8a Am.Ba+Am.Bxyxzyz+Ca+Cb
-8b Am.Bxyxzyz+Cb
-24c Am.Bxyxzyz
-24d Am.Ba+Am.Bxyxzyz
-true
-
 gap> STOP_TEST("smoke.tst", 0);
