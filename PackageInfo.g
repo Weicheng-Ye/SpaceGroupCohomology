@@ -12,7 +12,7 @@ SetPackageInfo( rec(
   Subtitle       := "Mod-2 cohomology rings and LSM anomaly classes for the 230 space groups",
   Version        := "2.3.0",
   Date           := "2026-08-09",
-  License        := "GPL-2.0-or-later",
+  License        := "MIT",
 
   ##  The four URL fields below are required by GAP's package validator and
   ##  must each start with http:// , https:// or ftp:// .  The defaults
