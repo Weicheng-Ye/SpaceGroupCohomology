@@ -201,7 +201,7 @@ If this repository is useful for your research, please consider citing the
 ```
 
 The updated preprint is
-[arXiv:2410.03607v3](https://arxiv.org/abs/2410.03607v3):
+[arXiv:2410.03607v4](https://arxiv.org/abs/2410.03607v4):
 
 ```bibtex
 @Misc{liu2026crystallography,
@@ -211,7 +211,7 @@ The updated preprint is
 	eprint={2410.03607},
 	archivePrefix={arXiv},
 	primaryClass={cond-mat.str-el},
-	note={Version 3},
-	url={https://arxiv.org/abs/2410.03607v3},
+	note={Version 4},
+	url={https://arxiv.org/abs/2410.03607v4},
 }
 ```
